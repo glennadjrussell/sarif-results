@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-formatted=$(cat $1 | jq --raw-output '\n"| SNYK ID | Short description | Full Description |",\n"|---------|------------------|------------------|",\n(.runs[].tool.driver.rules[] | ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))\n')
+formatted=$(cat snyk.sarif | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",(.runs[].tool.driver.rules[] | ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
 
 echo "sarif_json=$formatted" >> $GITHUB_OUTPUT
 
