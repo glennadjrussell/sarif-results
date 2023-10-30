@@ -1,0 +1,16 @@
+# action.yml
+name: 'format-json'
+description: 'Format JSON file into usefully formatted output for insertion into a Github PR'
+inputs:
+  json:  # id of input
+    description: 'Sarif output'
+    required: true
+outputs:
+  contents: # id of output
+    description: 'Markdown formatted output'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.json }}
+
