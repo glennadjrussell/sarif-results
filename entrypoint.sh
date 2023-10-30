@@ -1,8 +1,4 @@
 #!/bin/sh -l
 
-echo "Hello $1"
-time=$(date)
-echo "time=$time" >> $GITHUB_OUTPUT
-
-cat $1
+cat $1 | jq --raw-output '\n"| SNYK ID | Short description | Full Description |",\n"|---------|------------------|------------------|",\n(.runs[].tool.driver.rules[] | ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))\n' >> $GITHUB_OUTPUT
 
