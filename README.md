@@ -1,6 +1,6 @@
-# format-json docker action
+# scan-results docker action
 
-Takes a JSON input and outputs an HTML formatted representation of that JSON.
+Takes a JSON input of Snyk scan results and outputs a markdown formatted representation of that JSON.
 
 ## Inputs
 
@@ -10,13 +10,13 @@ Takes a JSON input and outputs an HTML formatted representation of that JSON.
 
 ## Outputs
 
-## `contents`
+## `sarif_json`
 
 The formatted markdown
 
 ## Example usage
 
-uses: actions/hello-world-docker-action@v2
+uses: qarik-snyk/scan-resuits@v2
 with:
-  who-to-greet: 'Mona the Octocat'
+  json: snyk.sarif
 
