@@ -2,6 +2,9 @@
 name: 'format-json'
 description: 'Format JSON file into usefully formatted output for insertion into a Github PR'
 inputs:
+  format:
+    description: 'The format of the input file, i.e. sca or code sarif'
+    required: true
   json:  # id of input
     description: 'Sarif output'
     required: true
@@ -12,5 +15,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.format }}
     - ${{ inputs.json }}
 
