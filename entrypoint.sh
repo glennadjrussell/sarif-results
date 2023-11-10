@@ -6,7 +6,7 @@ case "$1" in
     if [ -z "$results" ]; then
       formatted="\u2705 No SCA issues reported"
     else
-      formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",( .runs[].results[], ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
+      formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",( .runs[].tool.drive.rules[], ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
     fi
     ;;
   code)
