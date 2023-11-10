@@ -2,10 +2,20 @@
 
 case "$1" in
   sca)
-    formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",(.runs[].tool.driver.rules[] | ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
+    results=$(cat "$2" | jq '.runs[].results[]')
+    if [ -z "$results" ]; then
+      formatted="\u2705 No SCA issues reported"
+    else
+      formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",( .runs[].results[], ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
+    fi
     ;;
   code)
-    formatted=$(cat "$2" | jq --raw-output '"| SNYK Rule ID | Source file | Line |","|---------|------------------|------------------|",(.runs[].results[] | ["|", .ruleId, "|", .locations[].physicalLocation.artifactLocation.uri, "|", .locations[].physicalLocation.region.startLine, "|"] | join(" "))')
+    results=$(cat "$2" | jq '.runs[].results[]')
+    if [ -z "$results" ]; then
+      formatted="\u2705 No SCA issues reported"
+    else
+      formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",(.runs[].results[] | ["|", .ruleId, "|", .locations[].physicalLocation.artifactLocation.uri, "|", .locations[].physicalLocation.region.startLine, "|"] | join(" "))')
+    fi
     ;;
   *)
     exit 1
@@ -16,4 +26,3 @@ echo "$formatted" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT
 
 exit 0
-
