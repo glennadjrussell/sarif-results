@@ -1,4 +1,4 @@
-# scan-results docker action
+# sarif-results docker action
 
 Takes a JSON input of Snyk scan results and outputs a markdown formatted representation of that JSON.
 
@@ -13,6 +13,11 @@ Takes a JSON input of Snyk scan results and outputs a markdown formatted represe
 ## `sarif_json`
 
 The formatted markdown
+
+
+## 'status'
+
+A status message on results found
 
 ## Example usage
 
