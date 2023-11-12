@@ -5,7 +5,7 @@ case "$1" in
     results=$(cat "$2" | jq '.runs[].tool.driver.rules[]')
     if [ -z "$results" ]; then
       status="\u2705 No SCA issues reported"
-      echo "status=$status'" >> $GITHUB_OUTPUT
+      echo "status=$status" >> $GITHUB_OUTPUT
       formatted="$status"
     else
       echo "status=\u274C SCA issues reported" >> $GITHUB_OUTPUT
