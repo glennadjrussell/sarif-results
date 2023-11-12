@@ -8,7 +8,7 @@ case "$1" in
       echo "status=$status'" >> $GITHUB_OUTPUT
       formatted="$status"
     else
-      echo "status='\u274C SCA issues reported'" >> $GITHUB_OUTPUT
+      echo "status=\u274C SCA issues reported" >> $GITHUB_OUTPUT
       formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",( .runs[].tool.driver.rules[] | ["|", .id, "|", .shortDescription.text, "|", .fullDescription.text, "|"] | join(" "))')
     fi
     ;;
@@ -19,7 +19,7 @@ case "$1" in
       formatted="$status"
       echo "status=$status" >> $GITHUB_OUTPUT
     else
-      echo "status='\u274C code issues reported'" >> $GITHUB_OUTPUT
+      echo "status=\u274C Code issues reported" >> $GITHUB_OUTPUT
       formatted=$(cat "$2" | jq --raw-output '"| SNYK ID | Short description | Full Description |","|---------|------------------|------------------|",(.runs[].results[] | ["|", .ruleId, "|", .locations[].physicalLocation.artifactLocation.uri, "|", .locations[].physicalLocation.region.startLine, "|"] | join(" "))')
     fi
     ;;
