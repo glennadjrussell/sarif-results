@@ -15,7 +15,7 @@ Takes a JSON input of Snyk scan results and outputs a markdown formatted represe
 The formatted markdown
 
 
-## 'status'
+## `status`
 
 A status message on results found
 
